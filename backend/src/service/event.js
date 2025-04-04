@@ -43,7 +43,7 @@ class ServiceEvent {
 
         await oldEvent.destroy();
         return { message: "Evento deletado com sucesso!" };
-    }
+    cha}
 }
 
 module.exports = new ServiceEvent();
