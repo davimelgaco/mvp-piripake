@@ -18,3 +18,4 @@ const sequelize = new Sequelize({
 
 // Exporte a instância do Sequelize
 module.exports = sequelize;
+ 

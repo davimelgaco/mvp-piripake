@@ -4,6 +4,7 @@ const express = require('express');
 const database = require('./database');
 const cors = require('cors');
 const participantRouter = require('./routes/participantRoutes');
+const eventRouter = require('./routes/eventRoutes');
 
 const app = express();
 
@@ -13,10 +14,11 @@ app.use(express.json());
 const port = 3001
 
 app.use('/api/v1/participant', participantRouter)
+app.use('/api/v1/event', eventRouter)
 
 
-database.db
-    .sync({ force: true })
+database
+    .sync({ force: false })
     .then((_) => {
         app.listen(port, () => {
             console.info(`'✅ Conectado ao MySQL com Sequelize!'${port}`);
