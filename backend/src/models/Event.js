@@ -1,5 +1,7 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../database');
+import { DataTypes } from "sequelize";
+import sequelize from "../database.js";
+
+
 
 const Event = sequelize.define('Event', {
     id: {
@@ -26,4 +28,4 @@ const Event = sequelize.define('Event', {
     timestamps: true // createdAt e updatedAt
 });
 
-module.exports = Event;
+export default Event;

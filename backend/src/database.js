@@ -1,21 +1,17 @@
-
-
-
 // database.js
+import { Sequelize } from 'sequelize';
+import dotenv from 'dotenv';
 
-const { Sequelize } = require('sequelize');
-require('dotenv').config();
+dotenv.config();
 
 // Criação da instância do Sequelize
 const sequelize = new Sequelize({
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    dialect: process.env.DB_DIALECT || 'mysql', // Alterando para 'mysql'
+  database: process.env.DB_NAME,
+  host: process.env.DB_HOST,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  dialect: process.env.DB_DIALECT || 'mysql',
 });
 
-
-// Exporte a instância do Sequelize
-module.exports = sequelize;
- 
+// Exportando com ES Modules
+export default sequelize;

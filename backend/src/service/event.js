@@ -1,13 +1,13 @@
-const modelEvent = require('../models/Event');
+import modelEvent from '../models/Event.js';
 
 class ServiceEvent {
 
     async FindAll() {
-        return modelEvent.findAll({ where: {} })
+        return modelEvent.findAll({ where: {} });
     }
 
-    async FindById( id ) {
-        return modelEvent.findOne({ where: { id }})
+    async FindById(id) {
+        return modelEvent.findOne({ where: { id } });
     }
 
     async Create(name, status) {
@@ -16,26 +16,26 @@ class ServiceEvent {
         } else if (!status) {
             throw new Error("Favor informar o status do evento");
         }
-        return modelEvent.create({ name, status })
-
+        return modelEvent.create({ name, status });
     }
+
     async Update(id, name, status) {
         const oldEvent = await this.FindById(id);
-    
 
         if (!oldEvent) {
             throw new Error("Bar não encontrado!");
         }
 
-        oldEvent.name = name || oldEvent.name
-        oldEvent.status = status || oldEvent.status
+        oldEvent.name = name || oldEvent.name;
+        oldEvent.status = status || oldEvent.status;
 
-        await oldEvent.save()
+        await oldEvent.save();
 
-        return oldEvent
+        return oldEvent;
     }
+
     async Delete(id) {
-        const oldEvent = await this.FindById(id)
+        const oldEvent = await this.FindById(id);
 
         if (!oldEvent) {
             throw new Error("Bar não encontrado!");
@@ -43,7 +43,7 @@ class ServiceEvent {
 
         await oldEvent.destroy();
         return { message: "Evento deletado com sucesso!" };
-    cha}
+    }
 }
 
-module.exports = new ServiceEvent();
+export default new ServiceEvent();

@@ -1,10 +1,13 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
 
-const express = require('express');
-const database = require('./database');
-const cors = require('cors');
-const participantRouter = require('./routes/participantRoutes');
-const eventRouter = require('./routes/eventRoutes');
+import database from './database.js';
+import participantRouter from './routes/participantRoutes.js';
+import eventRouter from './routes/eventRoutes.js';
+
+dotenv.config();
+
 
 const app = express();
 
