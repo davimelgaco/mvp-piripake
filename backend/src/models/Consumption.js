@@ -32,8 +32,6 @@ const Consumptions = sequelize.define('Consumptions', {
     timestamps: false, // 🔸 se você não estiver usando createdAt/updatedAt
 })
 
-Consumptions.belongsTo(Event, {
-    foreignKey: "eventId"
-})
+
 
 export default Consumptions;

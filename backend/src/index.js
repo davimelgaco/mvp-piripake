@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
+import { sequelize } from './models/index.js'; // Isso já importa tudo e define os relacionamentos
 
 import database from './database.js';
 import participantRouter from './routes/participantRoutes.js';

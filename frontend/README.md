@@ -1,70 +1,76 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 🖥️ Frontend - Piripake do Chavs
 
-## Available Scripts
+Frontend da aplicação Piripake do Chavs, criado com **React**. A interface permite registrar os eventos mensais, adicionar consumos e participantes, e visualizar a divisão da conta.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🛠️ Tecnologias utilizadas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React
+- React Router DOM
+- Axios (requisições à API)
+- CSS Modules / Tailwind (opcional)
+- Vite (recomendado) ou Create React App
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 📁 Estrutura
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+frontend/
+├── src/
+│   ├── pages/              # Páginas como Home, EventForm, EventDetails
+│   ├── components/         # Componentes reutilizáveis
+│   ├── services/           # Axios configs
+│   └── App.jsx             # Roteamento e estrutura
+```
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📱 Funcionalidades
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 🆕 Criar novo evento
+- 🍻 Adicionar consumos por produto (cervejas, porções, etc)
+- 👥 Associar participantes aos produtos consumidos
+- 🧾 Visualizar cálculo detalhado por pessoa
+- 💡 (Planejado) Suporte para participantes visitantes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🔗 Integração com Backend
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+A comunicação com a API é feita via Axios com base na URL definida em `services/api.js`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```js
+// Exemplo
+axios.post("/events/1/consumption", {
+  productName: "Cerveja Brahma",
+  quantityTotal: 10,
+  priceUnit: 9.00,
+  participantes: [
+    { id: 1, quantidade: 8 },
+    { id: 2, quantidade: 10 },
+    ...
+  ]
+})
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## ▶️ Rodando localmente
 
-## Learn More
+```bash
+npm install
+npm run dev
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> Certifique-se de que o backend está rodando em `http://localhost:3001` (ou outro configurado)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## ✨ Melhorias planejadas
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Login (com token)
+- Histórico dos eventos
+- Exportar relatórios PDF

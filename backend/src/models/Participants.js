@@ -16,4 +16,6 @@ const Participant = sequelize.define('Participant', {
   timestamps: false
 });
 
+
+
 export default Participant;

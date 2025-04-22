@@ -28,4 +28,5 @@ const Event = sequelize.define('Event', {
     timestamps: true // createdAt e updatedAt
 });
 
+
 export default Event;
