@@ -12,8 +12,8 @@ Event.hasMany(Consumption, { foreignKey: "eventId" });
 Consumption.belongsTo(Event, { foreignKey: "eventId" });
 
 // Consumption 1:N ConsumptionParticipants
-Consumption.hasMany(ConsumptionParticipants, { foreignKey: "consumptionsId" });
-ConsumptionParticipants.belongsTo(Consumption, { foreignKey: "consumptionsId" });
+Consumption.hasMany(ConsumptionParticipants, { foreignKey: "consumptionId" });
+ConsumptionParticipants.belongsTo(Consumption, { foreignKey: "consumptionId" });
 
 // Participant 1:N ConsumptionParticipants
 Participant.hasMany(ConsumptionParticipants, { foreignKey: "participantId" });

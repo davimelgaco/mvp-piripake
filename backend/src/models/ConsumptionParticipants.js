@@ -10,7 +10,7 @@ const ConsumptionParticipants = sequelize.define('ConsumptionParticipants', {
         primaryKey: true,
         autoIncrement: true
     },
-    consumptionsId: {
+    consumptionId: {
         type: DataTypes.INTEGER,
         references: {
             model: Consumptions,
@@ -29,7 +29,7 @@ const ConsumptionParticipants = sequelize.define('ConsumptionParticipants', {
     }
 },
 {
-    tableName: "consumptionParticipants", // 🔸 define o nome real da tabela no banco, se necessário
+    tableName: "consumptionparticipants", // 🔸 define o nome real da tabela no banco, se necessário
     timestamps: false, // 🔸 se você não estiver usando createdAt/updatedAt
 })
 

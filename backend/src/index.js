@@ -4,8 +4,11 @@ import cors from 'cors';
 import { sequelize } from './models/index.js'; // Isso já importa tudo e define os relacionamentos
 
 import database from './database.js';
+
 import participantRouter from './routes/participantRoutes.js';
 import eventRouter from './routes/eventRoutes.js';
+import consumptionRouter from './routes/consumptionRoutes.js';
+import consumptionParticipantRouter from './routes/consumptionParticipantRoutes.js';
 
 dotenv.config();
 
@@ -19,6 +22,8 @@ const port = 3001
 
 app.use('/api/v1/participant', participantRouter)
 app.use('/api/v1/event', eventRouter)
+app.use('/api/v1/events/', consumptionRouter);
+app.use('/api/v1/events/consumption-participants', consumptionParticipantRouter);
 
 
 database
