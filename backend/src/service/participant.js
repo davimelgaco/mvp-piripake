@@ -1,4 +1,4 @@
-import modelParticipant from "../models/participants.js";
+import modelParticipant from "../models/Participants.js";
 
 class ServiceParticipant {
    async FindAll() {

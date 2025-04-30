@@ -2,6 +2,20 @@ import consumptionParticipantService from "../service/consumptionParticipant.js"
 
 class ConsumptionParticipantController {
     
+    async FindAll(req, res) {
+
+        try {
+            const consumptionParticipant = await consumptionParticipantService.FindAll();
+         
+            if (!consumptionParticipant) {
+                return res.status(404).json({ message: "Participante de consumo não encontrado para este evento" });
+            }
+
+            return res.status(200).json(consumptionParticipant);
+        } catch (error) {
+            return res.status(500).json({ message: "Erro no servidor", error: error.message });
+        }
+    }
     async FindById(req, res) {
         const { id } = req.params;
 
@@ -37,3 +51,5 @@ class ConsumptionParticipantController {
 }
 
 export default new ConsumptionParticipantController();
+
+
