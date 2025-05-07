@@ -24,9 +24,9 @@ class ParticipantController {
         try {
             const { name } = req.body;
             const participant = await serviceParticipant.Create(name);
-            res.status(200).send(`Deu bom ${participant}`);
+            res.status(200).send({participant});
         } catch (e) {
-            res.status(500).send("Deu ruim");
+            res.status(500).send({ msg: e.message });
         }
     }
 
@@ -43,7 +43,7 @@ class ParticipantController {
 
     async Delete(req, res) {
         try {
-            const { id } = req.params;
+            const { id } = req.body;
             const participant = await serviceParticipant.Delete(id);
             res.status(200).send({ participant });
         } catch (error) {

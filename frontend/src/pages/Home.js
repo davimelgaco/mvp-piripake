@@ -13,6 +13,9 @@ const HomePage = () => {
       <Link to="/events">
         <button type="button">Ver Eventos</button>
       </Link>
+      <Link to="/participants">
+        <button type="button">Ver Participantes</button>
+      </Link>
     </div>
   );
 };

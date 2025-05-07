@@ -7,6 +7,6 @@ participantRouter.post('/', ParticipantController.Create);
 participantRouter.get('/', ParticipantController.FindAll);
 participantRouter.get('/:id', ParticipantController.FindById);
 participantRouter.put('/:id', ParticipantController.Update);
-participantRouter.delete('/:id', ParticipantController.Delete);
+participantRouter.delete('/', ParticipantController.Delete);
 
 export default participantRouter;

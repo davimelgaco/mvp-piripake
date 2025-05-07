@@ -1,10 +1,7 @@
-import axios from "axios";
+import api from '../api'; // api.js já deve estar configurado com baseURL
 
-// Crie uma instância do Axios (opcional, para reutilizar a URL base)
 
-const api = axios.create({
-    baseURL: 'http://localhost:3001/api/v1/', // URL do seu backend
-})
+
 
 export const getAllEvents = async () => {
     try {
