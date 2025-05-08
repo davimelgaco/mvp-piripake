@@ -22,10 +22,16 @@ const EventForm = () => {
       };
 
       // Chama o service para criar o evento
-      await createEvent(newEvent);
+      const createdEvent = await createEvent(newEvent); // <- Aqui pega os dados retornados, incluindo o ID
 
-      // Redireciona para a lista de eventos
-      navigate("/events");
+      if (createdEvent && createdEvent.event && createdEvent.event.id) {
+        // Redireciona para a página do evento criado
+        navigate(`/event/${createdEvent.event.id}`);
+        console.log(createdEvent.event.id);
+      } else {
+        console.error("ID do evento não encontrado na resposta.");
+        
+      }
     } catch (err) {
       console.error("Erro ao criar evento", err);
     }
