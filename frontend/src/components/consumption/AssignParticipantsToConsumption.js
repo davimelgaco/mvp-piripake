@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import consumptionParticipantService from '../../services/consumptionParticipantService';
-import { getEventById } from '../../services/eventService';
+import { getAllParticipants } from '../../services/participantService'; // Supondo que esta função retorne todos os participantes
 import { toast } from 'react-toastify';
-
 
 const AssignParticipantsToConsumption = ({ consumptionId, eventId }) => {
   const [participants, setParticipants] = useState([]);
@@ -10,9 +9,24 @@ const AssignParticipantsToConsumption = ({ consumptionId, eventId }) => {
 
   useEffect(() => {
     const loadParticipants = async () => {
-      const event = await getEventById(eventId);
-      setParticipants(event.participants || []);
+      try {
+        const response = await getAllParticipants(); // Busca todos os participantes
+                console.log('Resposta da API:', response); // Verifique o que está sendo retornado
+
+ const allParticipants = response.data || []; // Supondo que os participantes estejam em response.data
+        if (!allParticipants.length) {
+          console.log('Nenhum participante encontrado na resposta');
+        }
+        // Filtra os participantes do evento atual
+        const eventParticipants = allParticipants.filter(
+          (participant) => participant.eventId === eventId
+        );
+        setParticipants(eventParticipants);
+      } catch (error) {
+        console.error("Erro ao carregar participantes:", error);
+      }
     };
+
     loadParticipants();
   }, [eventId]);
 

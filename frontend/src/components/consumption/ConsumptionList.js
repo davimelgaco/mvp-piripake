@@ -6,18 +6,37 @@ const ConsumptionList = ({ eventId, reload }) => {
   const [consumptions, setConsumptions] = useState([]);
   const [selectedConsumptionId, setSelectedConsumptionId] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await consumptionService.getByEventId(eventId);
-      setConsumptions(data);
-    };
-    fetchData();
-  }, [eventId, reload]);
+useEffect(() => {
+  const fetchData = async () => {
+    if (!eventId) {
+      console.warn('eventId está indefinido ou inválido:', eventId);
+      return;
+    }
+
+    try {
+      const response = await consumptionService.getByEventId(eventId);
+      console.log('Resposta da API:', response);
+
+      if (!Array.isArray(response.data)) {
+        console.warn('Resposta não é um array:', response.data);
+        setConsumptions([]);
+        return;
+      }
+
+      setConsumptions(response.data);
+    } catch (error) {
+      console.error('Erro ao buscar consumptions:', error);
+    }
+  };
+
+  fetchData();
+}, [eventId, reload]);
+
 
   return (
     <div>
       <h2 className="text-lg font-semibold mb-2">Lista de Consumos</h2>
-      {consumptions.map((item) => (
+      {Object.values(consumptions).map((item) => (
         <div key={item.id} className="border p-2 mb-2 rounded">
           <div className="flex justify-between items-center">
             <div>

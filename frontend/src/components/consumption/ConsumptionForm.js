@@ -10,7 +10,7 @@ const ConsumptionForm = ({ eventId, onSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await consumptionService.create({ eventId, productName, quantityTotal, priceUnit });
+      await consumptionService.create(eventId, { productName, quantityTotal, priceUnit });
       toast.success('Consumo adicionado!');
       setProductName('');
       setQuantityTotal('');
@@ -42,12 +42,11 @@ const ConsumptionForm = ({ eventId, onSuccess }) => {
       />
       <input
         type="number"
-        placeholder="Preço unitário"
+        step="0.01"
         value={priceUnit}
-        onChange={(e) => setPriceUnit(e.target.value)}
-        required
-        className="input"
+        onChange={(e) => setPriceUnit(parseFloat(e.target.value))}
       />
+
       <button type="submit" className="btn btn-primary">
         Adicionar
       </button>

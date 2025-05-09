@@ -1,4 +1,4 @@
-import api from './api';
+import api from '../api';
 
 const assignParticipants = (list) => api.post('/consumption-participants/bulk', list);
 
