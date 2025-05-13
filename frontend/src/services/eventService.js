@@ -43,7 +43,7 @@ export const createEvent = async (eventData) => {
 
 export const updateEvent = async () => {
     try {
-        const response = await api.get('/event');
+        const response = await api.put('/event');
         console.log('Resposta da API:', response.data); // Verifique o que é retornado da API
 
 
@@ -56,7 +56,7 @@ export const updateEvent = async () => {
 
 export const deleteEvent = async () => {
     try {
-        const response = await api.get('/event');
+        const response = await api.delete('/event');
         console.log('Resposta da API:', response.data); // Verifique o que é retornado da API
 
 

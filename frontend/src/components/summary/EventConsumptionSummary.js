@@ -12,9 +12,9 @@ const EventConsumptionSummary = ({ eventId }) => {
   return (
     <div>
       <button onClick={handleCalculate} className="btn btn-outline mb-4">
-        Calcular Consumo Total
+        Calcular Consumo Total SUMMARY
       </button>
-
+ 
       {summary && (
         <div className="space-y-4">
           {summary.map((p) => (

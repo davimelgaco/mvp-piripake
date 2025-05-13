@@ -1,5 +1,14 @@
+// services/consumptionParticipantService.js
 import api from '../api';
 
-const assignParticipants = (list) => api.post('/consumption-participants/bulk', list);
-
-export default { assignParticipants };
+// Atribui participantes a uma consumação específica
+export const assignParticipants = async (list) => {
+  try {
+    const response = await api.post('/events/consumption-participants', list);
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao atribuir participantes à consumação:', error);
+    
+    throw error;
+  }
+};

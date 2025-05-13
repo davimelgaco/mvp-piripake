@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import consumptionParticipantService from '../../services/consumptionParticipantService';
+import { assignParticipants } from '../../services/consumptionParticipantService';
 import { getAllParticipants } from '../../services/participantService'; // Supondo que esta função retorne todos os participantes
 import { toast } from 'react-toastify';
 
@@ -11,16 +11,14 @@ const AssignParticipantsToConsumption = ({ consumptionId, eventId }) => {
     const loadParticipants = async () => {
       try {
         const response = await getAllParticipants(); // Busca todos os participantes
-                console.log('Resposta da API:', response); // Verifique o que está sendo retornado
+                console.log('Resposta da API2:', response); // Verifique o que está sendo retornado
 
- const allParticipants = response.data || []; // Supondo que os participantes estejam em response.data
+ const allParticipants = response || []; // Supondo que os participantes estejam em response.data
         if (!allParticipants.length) {
-          console.log('Nenhum participante encontrado na resposta');
+          console.log('Nenhum participante encontrado na resposta', allParticipants);
         }
         // Filtra os participantes do evento atual
-        const eventParticipants = allParticipants.filter(
-          (participant) => participant.eventId === eventId
-        );
+        const eventParticipants = allParticipants
         setParticipants(eventParticipants);
       } catch (error) {
         console.error("Erro ao carregar participantes:", error);
@@ -34,16 +32,24 @@ const AssignParticipantsToConsumption = ({ consumptionId, eventId }) => {
     setUnits({ ...units, [participantId]: Number(value) });
   };
 
+ 
   const handleSubmit = async () => {
-    const payload = Object.entries(units).map(([participantId, unitsConsumed]) => ({
-      participantId,
-      consumptionId,
-      unitsConsumed,
-    }));
     try {
-      await consumptionParticipantService.assignParticipants(payload);
+      for (const [participantId, unitsConsumed] of Object.entries(units)) {
+        const payload = {
+          consumptionId,
+          participantId: Number(participantId), // 🔧 converter para número
+          unitsConsumed
+        };
+  
+        console.log("Enviando payload:", payload);
+  
+        await assignParticipants(payload);
+      }
+  
       toast.success('Participantes atribuídos com sucesso!');
     } catch (err) {
+      console.error("Erro ao atribuir participante:", err.response?.data || err.message);
       toast.error('Erro ao salvar atribuições.');
     }
   };

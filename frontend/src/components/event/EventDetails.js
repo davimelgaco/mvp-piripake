@@ -15,9 +15,10 @@ const EventDetails = ({ event }) => {
       <Link to="/events">
         <button type="button">Voltar para eventos</button>
       </Link>
-      <Link to="/event/">
-        <button type="button">Fazer a conta</button>
+      <Link to={`/event/${event.id}/consumption`}>
+        <button type="button">Inserir Consumações</button>
       </Link>
+
 
     </div>
   );

@@ -32,6 +32,7 @@ const { id: eventId } = useParams(); // ← agora funciona
     <div className="mt-8">
       <EventConsumptionSummary eventId={eventId} />
     </div>
+    <button onClick={() => navigate(`/event/${eventId}/calculate`)}>Calculo final</button>
     <button onClick={() => navigate('/events')} className="mb-4 text-blue-500 hover:underline">
       ← Voltar para eventos
     </button>
