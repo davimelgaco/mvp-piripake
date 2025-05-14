@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCalculation } from "../services/calculateService";
+import { Box, Typography, Button, CircularProgress, Paper } from "@mui/material";
 
 const CalculationPage = () => {
   const { id } = useParams(); // pega o ID do evento da URL
@@ -23,34 +24,59 @@ const CalculationPage = () => {
   }, [id]); // dispara o useEffect quando o id mudar
 
   // Enquanto carrega
-  if (loading) return <p>Carregando cálculo...</p>;
+  if (loading) return <CircularProgress />;
 
   // Se não houver dados
-  if (!calculation) return <p>Nenhum cálculo encontrado.</p>;
+  if (!calculation) return <Typography>Erro ao buscar cálculo.</Typography>;
 
   return (
-    <div>
-      <h2>Divisão Detalhada</h2>
-      <ul>
-        {/* Object.entries transforma o objeto em um array de [chave, valor] */}
-        {Object.entries(calculation).map(([participantId, participantData]) => (
-          <li key={participantId}>
-            <strong>{participantData.participantName}</strong>: R${" "}
-            {participantData.totalAmount.toFixed(2)}
-            <ul>
-              {/* Detalhes do consumo por produto */}
-              {participantData.details.map((detail, i) => (
-                <li key={i}>
-                  {detail.product} – {detail.units} x R${" "}
-                  {(detail.amount / detail.units).toFixed(2)} = R${" "}
-                  {detail.amount.toFixed(2)}
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Box sx={{ p: 4 }}>
+      <Typography variant="h4" sx={{ marginBottom: 3 }}>
+        Divisão Detalhada
+      </Typography>
+
+      <Paper sx={{ padding: 3 }}>
+        <Typography variant="h6" sx={{ marginBottom: 2 }}>
+          Detalhamento por Participante:
+        </Typography>
+        <ul>
+          {/* Object.entries transforma o objeto em um array de [chave, valor] */}
+          {Object.entries(calculation).map(([participantId, participantData]) => (
+            <li key={participantId} style={{ marginBottom: 10 }}>
+              <Typography variant="h6">
+                <strong>{participantData.participantName}</strong>
+              </Typography>
+              <Typography variant="body1">
+                Total: R${participantData.totalAmount.toFixed(2)}
+              </Typography>
+              <ul>
+                {/* Detalhes do consumo por produto */}
+                {participantData.details.map((detail, i) => (
+                  <li key={i}>
+                    {detail.product} – {detail.units} x R${(detail.amount / detail.units).toFixed(2)} = R${detail.amount.toFixed(2)}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </Paper>
+
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{
+          backgroundColor: '#353b93',
+          '&:hover': {
+            backgroundColor: '#2a2f74',
+          },
+          marginTop: 2
+        }}
+        href={`/events`} // exemplo de navegação para lista de eventos
+      >
+        Voltar para Eventos
+      </Button>
+    </Box>
   );
 };
 

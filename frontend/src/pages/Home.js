@@ -1,70 +1,141 @@
-
+import React from 'react';
 import { Link } from 'react-router-dom';
-//import Logo from '../components/Logo';
-import { ArrowRight } from 'lucide-react';
-
-import '../index.css';
+import { 
+  Container, 
+  Typography, 
+  Button, 
+  Box, 
+  AppBar, 
+  Toolbar, 
+  Paper,
+  Grid
+} from '@mui/material';
+import { Add, ListAlt, People, ArrowForward } from '@mui/icons-material';
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 flex flex-col">
-      {/* Header */}
-      <header className="w-full py-4 px-6 flex justify-between items-center bg-white shadow-sm">
-      {/*  <Logo />*/}
-        <nav className="hidden md:flex space-x-4">
-          <Link to="/about" className="text-gray-600 hover:text-primary transition-colors">Sobre</Link>
-          <Link to="/help" className="text-gray-600 hover:text-primary transition-colors">Ajuda</Link>
-        </nav>
-      </header>
+    <Box sx={{ flexGrow: 1 }}>
+      {/* Header/AppBar */}
+      <AppBar position="static" sx={{ backgroundColor: '#353b93' }}>
+        <Toolbar>
+          {/* Logo placeholder - 150x50px dimension */}
+          <Box 
+            sx={{ 
+              width: 150, 
+              height: 50, 
+              backgroundColor: 'white', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              borderRadius: 1,
+              marginRight: 2
+            }}
+          >
+            <Typography variant="h6" sx={{ color: '#353b93', fontWeight: 'bold' }}>
+              LOGO
+            </Typography>
+          </Box>
+          <Box sx={{ flexGrow: 1 }} />
+          <Button color="inherit" component={Link} to="/about">Sobre</Button>
+          <Button color="inherit" component={Link} to="/help">Ajuda</Button>
+        </Toolbar>
+      </AppBar>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col items-center justify-center px-6 py-10 animate-fade-in">
-        <div className="max-w-3xl w-full text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6 animate-bounce-in">
-            Piripake do Chavs
-          </h1>
-          
-          <p className="text-lg md:text-xl text-gray-700 mb-12 max-w-xl mx-auto">
-            Bem-vindo ao sistema de divisão de contas! Organize seus eventos e divida as despesas de forma justa e fácil.
-          </p>
+      <Container maxWidth="md" sx={{ mt: 8, textAlign: 'center' }}>
+        <Typography variant="h2" component="h1" gutterBottom sx={{ color: '#353b93', fontWeight: 'bold' }}>
+          Piripake do Chavs
+        </Typography>
+        
+        <Typography variant="h5" sx={{ mb: 6, color: 'text.secondary' }}>
+          Bem-vindo ao sistema de divisão de contas!
+        </Typography>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <Link to="/event/create" className="animate-bounce-in" style={{ animationDelay: '0.1s' }}>
-              <button 
-                type="button" 
-                className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 group"
+        <Paper elevation={3} sx={{ p: 4, borderRadius: 2, mb: 6 }}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={4}>
+              <Button
+                component={Link}
+                to="/event/create"
+                variant="contained"
+                size="large"
+                fullWidth
+                startIcon={<Add />}
+                endIcon={<ArrowForward />}
+                sx={{
+                  backgroundColor: '#353b93',
+                  py: 2,
+                  '&:hover': {
+                    backgroundColor: '#2a2f74'
+                  }
+                }}
               >
                 Iniciar Piripake
-                <ArrowRight className="h-5 w-5 transition-transform transform group-hover:translate-x-1" />
-              </button>
-            </Link>
-
-            <Link to="/events" className="animate-bounce-in" style={{ animationDelay: '0.2s' }}>
-              <button 
-                type="button" 
-                className="w-full bg-white hover:bg-gray-50 text-primary border-2 border-primary font-semibold py-4 px-6 rounded-lg shadow-md hover:shadow-lg transition-all"
+              </Button>
+            </Grid>
+            
+            <Grid item xs={12} md={4}>
+              <Button
+                component={Link}
+                to="/events"
+                variant="outlined"
+                size="large"
+                fullWidth
+                startIcon={<ListAlt />}
+                sx={{
+                  borderColor: '#353b93',
+                  color: '#353b93',
+                  py: 2,
+                  '&:hover': {
+                    borderColor: '#2a2f74',
+                    backgroundColor: 'rgba(53, 59, 147, 0.04)'
+                  }
+                }}
               >
                 Ver Eventos
-              </button>
-            </Link>
-
-            <Link to="/participants" className="animate-bounce-in" style={{ animationDelay: '0.3s' }}>
-              <button 
-                type="button" 
-                className="w-full bg-white hover:bg-gray-50 text-primary border-2 border-primary font-semibold py-4 px-6 rounded-lg shadow-md hover:shadow-lg transition-all"
+              </Button>
+            </Grid>
+            
+            <Grid item xs={12} md={4}>
+              <Button
+                component={Link}
+                to="/participants"
+                variant="outlined"
+                size="large"
+                fullWidth
+                startIcon={<People />}
+                sx={{
+                  borderColor: '#353b93',
+                  color: '#353b93',
+                  py: 2,
+                  '&:hover': {
+                    borderColor: '#2a2f74',
+                    backgroundColor: 'rgba(53, 59, 147, 0.04)'
+                  }
+                }}
               >
                 Ver Participantes
-              </button>
-            </Link>
-          </div>
-        </div>
-      </main>
+              </Button>
+            </Grid>
+          </Grid>
+        </Paper>
+      </Container>
 
       {/* Footer */}
-      <footer className="w-full py-4 bg-gray-50 text-center text-gray-500 border-t border-gray-200">
-        <p>© 2025 Piripake do Chavs. Todos os direitos reservados.</p>
-      </footer>
-    </div>
+      <Box
+        component="footer"
+        sx={{
+          py: 3,
+          mt: 'auto',
+          backgroundColor: '#f5f5f5',
+          textAlign: 'center'
+        }}
+      >
+        <Typography variant="body2" color="text.secondary">
+          © 2025 Piripake do Chavs. Todos os direitos reservados.
+        </Typography>
+      </Box>
+    </Box>
   );
 };
 
